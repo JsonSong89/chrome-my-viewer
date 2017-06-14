@@ -6,7 +6,7 @@
 export default {
   data:function(){
     return {
-      title:'Vue.js'
+      title:'Vue.js2'
     }
   }
 }

@@ -10,10 +10,11 @@
     "128": "images/icon-128.png"
   },
   "background": {
-    "scripts": [
-      "scripts/background.js"
-    ]
+    "page": "pages/background.html"
   },
+  "web_accessible_resources": [
+    "scripts/test_access.js"
+  ],
   "browser_action": {
     "default_icon": {
       "19": "images/icon-19.png",
@@ -30,6 +31,7 @@
     "contentSettings",
     "contextMenus",
     "cookies",
+    "background",
     "debugger",
     "declarativeContent",
     "history",
