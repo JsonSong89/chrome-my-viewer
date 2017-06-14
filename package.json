@@ -53,6 +53,7 @@
     "gulp-util": "3.x.x",
     "gulp-vueify": "0.0.3",
     "gulp-zip": "3.x.x",
+    "html-loader": "^0.4.5",
     "require-dir": "0.x.x",
     "vinyl-named": "1.x.x",
     "vue": "^2.2.1",

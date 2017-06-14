@@ -32,7 +32,7 @@
 
 
   import Hello from './hello.vue';
-  import {injectFileOnCurrentTab, initPAgeHtmlStr} from '../source/util';
+  import {injectFileOnCurrentTab, initPageHtmlStr} from '../source/util';
   export default {
     data(){
       return {
@@ -48,7 +48,7 @@
         }, 100)
       },
       test2(){
-        console.log(initPAgeHtmlStr)
+        console.log(initPageHtmlStr)
       }
     },
     components: {

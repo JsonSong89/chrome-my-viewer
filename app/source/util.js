@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/6/14.
  */
-let initPAgeHtmlStr = require("./initApp.html");
+let initPageHtmlStr = require("html-loader!./initApp.html");
 
 
 function injectFile(id, str) {
@@ -41,4 +41,4 @@ let injectFileOnCurrentTab = function (path) {
   });
 };
 
-export {injectFileOnCurrentTab, initPAgeHtmlStr}
+export {injectFileOnCurrentTab, initPageHtmlStr}
