@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import gulpif from 'gulp-if';
-import { log, colors} from 'gulp-util';
+import {log, colors} from 'gulp-util';
 import named from 'vinyl-named';
 import webpack from 'webpack';
 import gulpWebpack from 'webpack-stream';
@@ -13,13 +13,13 @@ const ENV = args.production ? 'production' : 'development';
 gulp.task('scripts', (cb) => {
   return gulp.src(['app/scripts/*.js'])
     .pipe(plumber({
-      errorHandler: function() {
+      errorHandler: function () {
         // Webpack will log the errors
       }
     }))
     .pipe(named())
     .pipe(gulpWebpack({
-      devtool: args.sourcemaps ? 'inline-source-map': null,
+      devtool: args.sourcemaps ? 'inline-source-map' : null,
       watch: args.watch,
       plugins: [
         new webpack.DefinePlugin({
@@ -41,10 +41,16 @@ gulp.task('scripts', (cb) => {
         loaders: [{
           test: /\.js$/,
           loader: 'babel'
-        },{
+        }, {
           test: /\.vue$/,
           loader: 'vue-loader'
-        }]
+        }, {
+          test: /\.css$/,
+          loader: 'style-loader!css-loader'
+        }, {
+          test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+          loader: 'file-loader'
+        },]
       },
       resolve: {
         alias: {

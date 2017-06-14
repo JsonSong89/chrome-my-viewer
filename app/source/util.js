@@ -2,7 +2,9 @@
  * Created by Administrator on 2017/6/14.
  */
 let initPageHtmlStr = require("html-loader!./initApp.html");
-
+import $ from "./lib/jquery"
+import _ from "./lib/lodash"
+import axios from "axios"
 
 function injectFile(id, str) {
   if (str.substr(-2, 2).toLowerCase() === "js") {
@@ -41,4 +43,6 @@ let injectFileOnCurrentTab = function (path) {
   });
 };
 
-export {injectFileOnCurrentTab, initPageHtmlStr}
+export {injectFileOnCurrentTab, initPageHtmlStr, $, _, axios}
+
+

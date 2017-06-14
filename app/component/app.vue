@@ -42,10 +42,10 @@
     methods: {
       test1(){
         injectFileOnCurrentTab("scripts/initPage.js");
-        setTimeout(() => {
-          injectFileOnCurrentTab("scripts/popup.js");
-          injectFileOnCurrentTab("styles/popup.css");
-        }, 100)
+//        setTimeout(() => {
+//          injectFileOnCurrentTab("scripts/popup.js");
+//          injectFileOnCurrentTab("styles/popup.css");
+//        }, 100)
       },
       test2(){
         console.log(initPageHtmlStr)
