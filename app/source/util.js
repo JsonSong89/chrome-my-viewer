@@ -1,9 +1,10 @@
+/// <reference path="../../typings/global.d.ts" />
+
 /**
  * Created by Administrator on 2017/6/14.
  */
-let initPageHtmlStr = require("html-loader!./initApp.html");
-import $ from "./lib/jquery"
-import _ from "./lib/lodash"
+import $  from "jquery"
+import _ from "lodash"
 import axios from "axios"
 
 function injectFile(id, str) {
@@ -43,6 +44,6 @@ let injectFileOnCurrentTab = function (path) {
   });
 };
 
-export {injectFileOnCurrentTab, initPageHtmlStr, $, _, axios}
+export {injectFileOnCurrentTab, $, _, axios}
 
 

@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "jquery": [
+        "src/assets/lib/jquery.js"
+      ]
+    },
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ],
+    "types": [
+      "vue-typescript-import-dts"
+    ],
+    "allowJs": true,
+    "module": "es2015",
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "isolatedModules": false,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "node_modules/*",
+    "dist/*",
+    "src/assets/lib/*",
+    "**/*.spec.ts"
+  ],
+  "compileOnSave": false
+}

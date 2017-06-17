@@ -38,19 +38,44 @@ gulp.task('scripts', (cb) => {
           loader: 'eslint-loader',
           exclude: /node_modules/
         }],
-        loaders: [{
-          test: /\.js$/,
-          loader: 'babel'
-        }, {
-          test: /\.vue$/,
-          loader: 'vue-loader'
-        }, {
-          test: /\.css$/,
-          loader: 'style-loader!css-loader'
-        }, {
-          test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-          loader: 'file-loader'
-        },]
+        loaders: [
+          {
+            test: /\.(ts|tsx)$/,
+            use: [{
+              loader: 'babel-loader',
+              options: {
+                presets: ['es2015']
+              }
+            }],
+            exclude: /node_modules/
+          },
+          {
+            test: /\.(ts|tsx)$/,
+            exclude: /node_modules|vue\/src/,
+            use: [{
+              loader: 'ts-loader',
+              options: {
+                appendTsSuffixTo: [/\.vue$/],
+                transpileOnly: true,
+                isolatedModules: true
+              }
+            }]
+          },
+
+          {
+            test: /\.js$/,
+            loader: 'babel',
+            query: {compact: false}
+          }, {
+            test: /\.vue$/,
+            loader: 'vue-loader'
+          }, {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
+          }, {
+            test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+            loader: 'file-loader'
+          },]
       },
       resolve: {
         alias: {
