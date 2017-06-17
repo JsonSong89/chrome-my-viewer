@@ -2,27 +2,9 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        <div class="notification is-info">
-          <h1>内嵌组件4</h1>
-          <hello></hello>
-        </div>
-      </div>
-      <div class="column">
-        <p class="notification is-success">
-          <label class="label">Username</label>
-        <p class="control has-icon has-icon-right">
-          <input class="input is-success" type="text" v-model="name">
-          <span class="icon is-small">
-              <i class="fa fa-check"></i>
-            </span>
-          <span class="help is-success">This username is available</span>
-        </p>
-        </p>
-      </div>
-      <div class="column">
-        <p class="notification is-warning">Third column</p>
+        <p class="notification ">功能面板</p>
         <button @click="test1">进入浏览模式</button>
-        <button @click="test2">test2</button>
+        <button @click="test2">注入常用库</button>
       </div>
     </div>
   </div>
@@ -32,7 +14,7 @@
 
 
   import Hello from './hello.vue';
-  import {injectFileOnCurrentTab, initPageHtmlStr} from '../source/util';
+  import {injectFileOnCurrentTab, injectCodeOnCurrentTab, initPageHtmlStr} from '../source/util';
   export default {
     data(){
       return {
@@ -48,7 +30,15 @@
 //        }, 100)
       },
       test2(){
-        console.log(initPageHtmlStr)
+        let path = chrome.extension.getURL('/scripts/test_access.js');
+        let injectFun = function (path) {
+          let s = document.createElement('script');
+          s.setAttribute('type', 'text/javascript');
+          s.setAttribute('src', path);
+          document.getElementsByTagName("head")[0].appendChild(s)
+        };
+        injectCodeOnCurrentTab(injectFun.toString() + ` ;\n injectFun('${path}')`);
+        console.log(injectFun.toString())
       }
     },
     components: {

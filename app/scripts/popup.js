@@ -7,4 +7,4 @@ var app=new Vue({
     name:'vue-chrome-extension'
   },
   render: h =>h(App)
-})
+});

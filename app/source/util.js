@@ -27,7 +27,6 @@ function injectFile(id, str) {
 
 let injectFileOnCurrentTab = function (path) {
   if (!chrome) return;
-
   chrome.windows.getCurrent(function (currentWindow) {
     //获取有指定属性的标签，为空获取全部标签
     chrome.tabs.query({
@@ -43,6 +42,20 @@ let injectFileOnCurrentTab = function (path) {
   });
 };
 
-export {injectFileOnCurrentTab, initPageHtmlStr, $, _, axios}
+let injectCodeOnCurrentTab = function (code) {
+  if (!chrome) return;
+  chrome.windows.getCurrent(function (currentWindow) {
+    chrome.tabs.query({
+      active: true, windowId: currentWindow.id
+    }, function (activeTabs) {
+      chrome.tabs.insertCSS(activeTabs[0].id, {
+        code,
+        allFrames: false
+      });
+    });
+  });
+};
+
+export {injectFileOnCurrentTab, injectCodeOnCurrentTab, initPageHtmlStr, $, _, axios}
 
 

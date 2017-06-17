@@ -1,4 +1,5 @@
-console.log("test for background in access !!");
+import {$, _, axios} from "../source/util"
 
-
-console.log(document.body.innerHTML);
+window.$ = $;
+window._ = _;
+window.axios = axios;
