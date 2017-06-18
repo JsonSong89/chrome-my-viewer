@@ -6,10 +6,11 @@ abstract class BaseStrategy {
 
   pageIndex: number = 0;
 
-  abstract useThis(url: string, html?: string): boolean
+  abstract  useThis(url: string, html?: string): boolean
 
   abstract hasNext(url: string, html?: string): boolean
 
   abstract isFinish(url: string, html?: string): boolean
 
 }
+export default BaseStrategy

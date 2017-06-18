@@ -33,35 +33,7 @@ gulp.task('scripts', (cb) => {
         new webpack.optimize.UglifyJsPlugin()
       ] : []),
       module: {
-        preLoaders: [{
-          test: /\.js$/,
-          loader: 'eslint-loader',
-          exclude: /node_modules/
-        }],
         loaders: [
-          {
-            test: /\.(ts|tsx)$/,
-            use: [{
-              loader: 'babel-loader',
-              options: {
-                presets: ['es2015']
-              }
-            }],
-            exclude: /node_modules/
-          },
-          {
-            test: /\.(ts|tsx)$/,
-            exclude: /node_modules|vue\/src/,
-            use: [{
-              loader: 'ts-loader',
-              options: {
-                appendTsSuffixTo: [/\.vue$/],
-                transpileOnly: true,
-                isolatedModules: true
-              }
-            }]
-          },
-
           {
             test: /\.js$/,
             loader: 'babel',

@@ -7,4 +7,9 @@ var app=new Vue({
     name:'vue-chrome-extension'
   },
   render: h =>h(App)
-})
+});
+// import {injectFileOnCurrentTab} from '../source/util';
+//
+// window.test1 = function () {
+//   injectFileOnCurrentTab("scripts/initPage.js");
+// };

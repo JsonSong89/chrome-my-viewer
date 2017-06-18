@@ -3,9 +3,6 @@
 /**
  * Created by Administrator on 2017/6/14.
  */
-import $  from "jquery"
-import _ from "lodash"
-import axios from "axios"
 
 function injectFile(id, str) {
   if (str.substr(-2, 2).toLowerCase() === "js") {
@@ -44,6 +41,15 @@ let injectFileOnCurrentTab = function (path) {
   });
 };
 
-export {injectFileOnCurrentTab, $, _, axios}
+function injectScriptInDom(file, position = "head") {
+  let th = document.getElementsByTagName(position)[0];
+  let s = document.createElement('script');
+  s.setAttribute('type', 'text/javascript');
+  s.setAttribute('src', file);
+  th.appendChild(s);
+}
+
+
+export {injectFileOnCurrentTab, injectScriptInDom}
 
 

@@ -4,8 +4,7 @@
  */
 import  $ from "jquery";
 import  _ from "lodash";
-///<reference path="jquery.d.ts" />
-let what = $("#sdf");
+import  BaseStrategy from "./BaseStrategy";
 
 interface UrlItem {
   reg: RegExp
@@ -54,11 +53,12 @@ export default class KnownUrlStrategy extends BaseStrategy {
   private url: string;
   urlItem: UrlItem;
 
-  constructor(url: string) {
+  constructor(url: string, $$: JQuery) {
     super();
     this.url = url;
     let find = urlItems.find(a => a.reg.test(url));
     if (find == null) throw new Error("没有找到正确的处理策略");
+    this.totalPage = find.getTotalPage($$);
     this.urlItem = find;
   }
 

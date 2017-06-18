@@ -7,6 +7,8 @@ import Vue from "vue"
 import _ from "lodash"
 import {Component} from 'vue-property-decorator'
 import moment from "moment";
+import axios from "axios";
+import $ from "jquery";
 export {Component, Inject, Model, Prop, Watch} from 'vue-property-decorator'
 
 
@@ -22,6 +24,6 @@ export let Hooks = {
 };
 
 export {
-  Vue, moment, _
+  Vue, moment, _, axios, $
 }
 

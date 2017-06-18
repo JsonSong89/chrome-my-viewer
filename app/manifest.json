@@ -13,7 +13,10 @@
     "page": "pages/background.html"
   },
   "web_accessible_resources": [
-    "scripts/test_access.js"
+    "scripts/test_access.js",
+    "scripts/initPage.js",
+    "scripts/initPageApp.js",
+    "scripts/vendors.js"
   ],
   "browser_action": {
     "default_icon": {

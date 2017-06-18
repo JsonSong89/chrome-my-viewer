@@ -1,21 +1,21 @@
-import {injectFileOnCurrentTab, $, _, axios} from '../source/util.js';
-
-import KnownUrlStrategy  from '../source/strategies/KnownUrlStrategy';
+import KnownUrlStrategy  from '../strategies/KnownUrlStrategy';
 
 function getImgs() {
 
 }
 
-import {Vue, Component} from "../source/base"
+import {Vue, Component, axios, $} from "../source/base"
 
 @Component
 export default class KnowUrlVC extends Vue {
 
+  str = "zhanweitest";
   flag = new Date();
 
   imgs: string[] = [];
 
   test1() {
+    console.log(this.str)
   }
 
   test2() {
@@ -23,10 +23,9 @@ export default class KnowUrlVC extends Vue {
 
   mounted() {
     let url = window.location.href;
-    let strategy = new KnownUrlStrategy(url);
+    let strategy = new KnownUrlStrategy(url, $("body"));
     let strategyItem = strategy.urlItem;
     let urls = strategy.getUrls();
-
     urls.forEach((url, i) => {
       axios.get(url).then(res => {
         let html = res.data;
