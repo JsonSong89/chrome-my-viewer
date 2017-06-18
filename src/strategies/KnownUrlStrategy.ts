@@ -2,9 +2,7 @@
  * Created by jsons on 2017/6/17.
  * 可以通过构造url来进行组装页面的策略集合
  */
-import  $ from "jquery";
-import  _ from "lodash";
-import  BaseStrategy from "./BaseStrategy";
+import {axios, Vue, _, $} from "source/base";
 
 interface UrlItem {
   reg: RegExp
@@ -17,65 +15,78 @@ function getNumFromStr(str: string): number {
   return parseInt(result[0])
 }
 
-const urlItems: UrlItem[] = [{
-  reg: /www.xieeqiao.com|www.yaoqmhw.com/,
-  getImgUrl($$: JQuery){
-    return $$.find(" div.content div.ny a > img").attr("src")
+const urlItems: UrlItem[] = [
+  {
+    reg: /www.yaoqmhw.com/,
+    getImgUrl($$: JQuery){
+      return $$.find(" div.content div.ny a > img").attr("src")
+    },
+    getTotalPage($$: JQuery){
+      let str = $$.find(".inc_page > a:nth-child(1)").text();
+      return getNumFromStr(str)
+    }
   },
-  getTotalPage($$: JQuery){
-    let str = $$.find(".inc_page > a:nth-child(1)").text();
-    return getNumFromStr(str)
-  }
-}, {
-  reg: /www.gkba.cc/,
-  getImgUrl($$: JQuery){
-    return $$.find(" div.tcontent   img").attr("src")
+  {
+    reg: /www.gkba.cc/,
+    getImgUrl($$: JQuery){
+      return $$.find(" div.tcontent   img").attr("src")
+    },
+    getTotalPage($$: JQuery){
+      let str = $$.find(".tg_pages >  a:nth-child(1)").text();
+      return getNumFromStr(str)
+    }
   },
-  getTotalPage($$: JQuery){
-    let str = $$.find(".tg_pages >  a:nth-child(1)").text();
-    return getNumFromStr(str)
-  }
-}, {
-  reg: /www.selie.org/,
-  getImgUrl($$: JQuery){
-    return $$.find("#imgshow img").attr("src")
-  },
-  getTotalPage($$: JQuery){
-    let str = $$.find(".pagelist:eq(0) > li:nth-child(1) > a:nth-child(1)").text();
-    return getNumFromStr(str)
-  }
-}];
+  {
+    reg: /www.selie.org/,
+    getImgUrl($$: JQuery){
+      return $$.find("#imgshow img").attr("src")
+    },
+    getTotalPage($$: JQuery){
+      let str = $$.find(".pagelist:eq(0) > li:nth-child(1) > a:nth-child(1)").text();
+      return getNumFromStr(str)
+    }
+  }];
 
 
-export default class KnownUrlStrategy extends BaseStrategy {
+class KnownUrlStrategy {
+  item: UrlItem;
 
-  private totalPage: number;
-  private url: string;
-  urlItem: UrlItem;
-
-  constructor(url: string, $$: JQuery) {
-    super();
-    this.url = url;
-    let find = urlItems.find(a => a.reg.test(url));
-    if (find == null) throw new Error("没有找到正确的处理策略");
-    this.totalPage = find.getTotalPage($$);
-    this.urlItem = find;
+  constructor(item: UrlItem, url: string, totalPage: number) {
+    this.item = item;
+    this.urls = _.range(2, totalPage).map(a => url.replace(/.html/, `_${ a}.html`));
   }
 
-  getUrls() {
-    return _.range(2, this.totalPage).map(a => this.url.replace(/.html/, `_${ a}.html`));
-  }
+  urls: string[];
 
-  useThis(url: string, html?: string): boolean {
-    return [/www.xieeqiao.com/, /www.yaoqmhw.com/, /www.gkba.cc/].some(a => a.test(url));
-  }
-
-  hasNext(url: string, html?: string): boolean {
-    return this.pageIndex < this.totalPage
-  }
-
-  isFinish(url: string, html?: string): boolean {
-    return this.pageIndex == this.totalPage
+  getImgUrl($$: JQuery): string {
+    return this.item.getImgUrl($$)
   }
 }
+
+class KnownUrlStrategyFactory {
+  static getStrategy(url: string, $$: JQuery): KnownUrlStrategy | null {
+    let find = urlItems.find(a => a.reg.test(url));
+    if (find == null) {
+      console.warn("没有找到对应的KnownUrl策略");
+      return null;
+    }
+    let totalPage = find.getTotalPage($$);
+    return new KnownUrlStrategy(find, url, totalPage)
+  }
+
+  static doGetImgs(imgs: string[], strategy: KnownUrlStrategy | null) {
+    if (strategy == null)return;
+    imgs.length = 0;
+    strategy.urls.forEach((url, i) => {
+      axios.get(url).then(res => {
+        let html = res.data;
+        let imgUrl = strategy.getImgUrl($(html));
+        console.log("get:  " + imgUrl);
+        Vue.set(imgs, i, imgUrl);
+      })
+    });
+  }
+}
+
+export {KnownUrlStrategyFactory, KnownUrlStrategy}
 

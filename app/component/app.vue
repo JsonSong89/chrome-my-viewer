@@ -3,7 +3,8 @@
     <div class="columns">
       <div class="column">
         <p class="notification ">功能面板</p>
-        <button @click="test1">进入浏览模式</button>
+        <button @click="test1">进入浏览模式(background)</button>
+        <button @click="test3">进入浏览模式(dom)</button>
         <button @click="test2">注入常用库</button>
       </div>
     </div>
@@ -12,7 +13,7 @@
 
 <script>
   import Hello from './hello.vue';
-  import {injectFileOnCurrentTab} from '../source/util';
+  import {injectFileOnCurrentTab, injectScriptInDom} from '../source/util';
   export default {
     data(){
       return {
@@ -21,17 +22,14 @@
     },
     methods: {
       test1(){
-        injectFileOnCurrentTab("scripts/initPage.js");
-        setTimeout(() => injectFileOnCurrentTab('/scripts/initPageApp.js'), 50)
-
-//        setTimeout(() => {
-//          injectFileOnCurrentTab("scripts/popup.js");
-//          injectFileOnCurrentTab("styles/popup.css");
-//        }, 100)
+        injectFileOnCurrentTab("scripts/vendors.js");
+        setTimeout(() => injectFileOnCurrentTab('/scripts/initPageApp.js'), 100)
       },
       test2(){
-
-      }
+        injectFileOnCurrentTab('/scripts/initPage.js')
+      },
+      test3(){
+      },
     },
     components: {
       hello: Hello

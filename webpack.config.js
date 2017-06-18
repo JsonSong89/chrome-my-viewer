@@ -15,7 +15,8 @@ let chunks = [];
 // getEntriesAndChunks();
 let config = {
   entry: {
-    initPageApp: join(__dirname, "/src/initPageApp.ts")
+    initPageApp: join(__dirname, "/src/initPageApp.ts"),
+    vendors: ["jquery", "lodash", "vue", "axios", "moment"],
   },
   output: {
     path: resolve(__dirname, './dist/chrome'),
@@ -106,7 +107,7 @@ let config = {
     new CommonsChunkPlugin({
       name: 'vendors',
       filename: 'scripts/vendors.js',
-      chunks: ["jquery", "lodash", "vue", "axios"],
+      chunks: ["initPageApp", "vendors"],
       minChunks: chunks.length
     }),
     new ExtractTextPlugin({
@@ -114,7 +115,7 @@ let config = {
       allChunks: true
     }),
     new WriteFilePlugin({
-      test: /initPageApp.js/,
+      test: /initPageApp.js|empty.js|vendors.js/,
       useHashIndex: false
     })
   ],

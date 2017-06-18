@@ -41,11 +41,18 @@ let injectFileOnCurrentTab = function (path) {
   });
 };
 
-function injectScriptInDom(file, position = "head") {
+
+/**
+ * @param resPath 全路径或者相对路径
+ * */
+function injectScriptInDom(resPath, position = "head") {
+  if (chrome && resPath.indexOf("chrome-extension") < 0) {
+    resPath = chrome.extension.getURL(resPath)
+  }
   let th = document.getElementsByTagName(position)[0];
   let s = document.createElement('script');
   s.setAttribute('type', 'text/javascript');
-  s.setAttribute('src', file);
+  s.setAttribute('src', resPath);
   th.appendChild(s);
 }
 
