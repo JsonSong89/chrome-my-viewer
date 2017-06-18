@@ -12,6 +12,12 @@
   "background": {
     "page": "pages/background.html"
   },
+  "content_scripts": [{
+    "matches": ["http://*/*","https://*/*"],
+    "js": ["scripts/initPage.js"],
+    "run_at": "document_start",
+    "all_frames": false
+  }],
   "web_accessible_resources": [
     "scripts/test_access.js",
     "scripts/initPage.js",
