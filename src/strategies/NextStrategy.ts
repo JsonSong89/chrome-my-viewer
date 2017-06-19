@@ -20,7 +20,7 @@ interface NextStrategy {
 
 
 let strategyList = [{
-  reg: /www.selie.org|www.xieeqiao.com|/,
+  reg: /www.selie.org|www.xieeqiao.com/,
 
   getNextUrl($$: JQuery): string {
     let a = $$.find("div.pageturn > a:last");
@@ -37,7 +37,11 @@ let strategyList = [{
 class NextStrategyFactory {
   static getStrategy(url: string): NextStrategy | null {
     let find = strategyList.find(a => a.reg.test(url));
-    if (find == null) console.warn("没有找到对应的Next策略");
+    if (find == null) {
+      console.info("没有找到对应的Next策略")
+    } else {
+      console.log("加载Next策略")
+    }
     return find as NextStrategy;
   }
 

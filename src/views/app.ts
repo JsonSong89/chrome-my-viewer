@@ -9,7 +9,7 @@ export default class KnowUrlVC extends Vue {
   imgs: string[] = [];
 
   test1() {
-    console.log(this.str)
+    this.useStrategy(window.location.href)
   }
 
   test2() {
@@ -22,7 +22,5 @@ export default class KnowUrlVC extends Vue {
   }
 
   mounted() {
-    let url = window.location.href;
-    this.useStrategy(url)
   }
 }

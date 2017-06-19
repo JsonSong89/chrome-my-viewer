@@ -14,6 +14,10 @@
 <script>
   import Hello from './hello.vue';
   import {injectFileOnCurrentTab, injectScriptInDom} from '../source/util';
+
+  var port = null;
+
+
   export default {
     data(){
       return {
@@ -22,6 +26,19 @@
     },
     mounted(){
 
+      chrome.tabs.query(
+        {active: true, currentWindow: true},
+        function (tabs) {
+          port = chrome.tabs.connect(//建立通道
+            tabs[0].id,
+            {name: "injectFile"}//通道名称
+          );
+          port.onMessage.addListener(function (msg) {//这里同时利用通道建立监听消息，可以监听对方返回的消息
+            if (msg.filePath ) {//如果对方(popup.js)返回的消息是{jia: "yuuuuu"}则将扩展里面的input框的值设置为"yuuuuuuu"
+
+            }
+          });
+        });
     },
     methods: {
       test1(){
@@ -38,7 +55,7 @@
           function (tabs) {
             var port = chrome.tabs.connect(//建立通道
               tabs[0].id,
-              {name: "ma"}//通道名称
+              {name: "injectFile"}//通道名称
             );
             $("#popup").click(function () {//给web页面的按钮绑定点击事件，通过点击事件来控制发送消息
               port.postMessage({jia: "aaaaaaa"});//向通道中发送消息

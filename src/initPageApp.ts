@@ -2,6 +2,10 @@ import {Vue, Component} from "./source/base"
 
 import {appId, initVueDom} from "./source/InitAppDom"
 
+import globalComponents from "./config/globalComponents"
+//注册全局组件
+Object.keys(globalComponents).forEach(k => Vue.component(k, globalComponents[k]));
+
 initVueDom();
 
 import gkmhApp from "./views/gkmh.vue"

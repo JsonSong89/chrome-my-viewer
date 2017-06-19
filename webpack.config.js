@@ -121,7 +121,7 @@ let config = {
   ],
   devServer: {
     host: '127.0.0.1',
-    port: 4051,
+    port: 4751,
     historyApiFallback: false,
     // noInfo: true,
     proxy: {

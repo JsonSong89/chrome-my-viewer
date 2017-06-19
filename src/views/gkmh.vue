@@ -1,8 +1,9 @@
 <template>
-  <div class="DivTop">
+  <div>
+    <side-nav></side-nav>
     <div>
       <span>{{flag}}</span>
-      <button @click="test1">test1</button>
+      <button @click="test1">进入看图</button>
       <button @click="test2">test2</button>
     </div>
     <div class="DivImg" v-for="img in imgs">
@@ -21,5 +22,9 @@
 
   .DivImg {
     margin: 20px 20px 20px 20px;
+  }
+
+  .DivTest111 {
+    padding: 30px 150px 10px 150px;
   }
 </style>

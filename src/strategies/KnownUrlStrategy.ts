@@ -67,7 +67,7 @@ class KnownUrlStrategyFactory {
   static getStrategy(url: string, $$: JQuery): KnownUrlStrategy | null {
     let find = urlItems.find(a => a.reg.test(url));
     if (find == null) {
-      console.warn("没有找到对应的KnownUrl策略");
+      console.info("没有找到对应的KnownUrl策略");
       return null;
     }
     let totalPage = find.getTotalPage($$);

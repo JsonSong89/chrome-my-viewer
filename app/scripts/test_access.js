@@ -12,7 +12,7 @@ document.title = "ChromeView";
 import {injectScriptInDom, injectFileOnCurrentTab} from "../source/util"
 
 
-const libs = {$, _, moment, Cookies, axios};
+const libs = {$, _, moment, Cookies, axios, jq: $};
 
 Object.keys(libs).forEach(k => {
   if (!window[k]) {
