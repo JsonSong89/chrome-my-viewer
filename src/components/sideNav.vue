@@ -57,7 +57,7 @@
           vm.navTop = top
         });
       });
-
+//document.elementFromPoint(2, 2);
     }
   }
 

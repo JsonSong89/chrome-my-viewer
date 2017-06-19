@@ -1,68 +1,20 @@
 # vue chrome extension example
 
-develop chrome extension with vue
-
+本项目基于[基础模板](https://github.com/cucygh/vue-chrome-extension-example)
+进行了二次开发.
 ## Installation
 
-	$ npm install
+	$ yarn
 
 ## Usage
 
-Run `$ gulp --watch` and load the `dist`-directory into chrome.
+`dev:chrome` 开启插件端代码的监控,`dev:app`开启位于src的应用端webpack的dev service
 
-## Entryfiles (bundles)
-
-There are two kinds of entryfiles that create bundles.
-
-1. All js-files in the root of the `./app/scripts` directory
-2. All css-,scss- and less-files in the root of the `./app/styles` directory
-
-## Tasks
-
-### Build
-
-    $ gulp
+## 工作流程简述
+由popup.html引入popup.js,popup.js打包了一个vue应用(app/component/app.vue),通过chrome扩展,将initPageApp注入到content script环境
 
 
-| Option         | Description                                                                                                                                           |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--watch`      | Starts a livereload server and watches all assets. <br>To reload the extension on change include `livereload.js` in your bundle.                      |
-| `--production` | Minifies all assets                                                                                                                                   |
-| `--verbose`    | Log additional data to the console.                                                                                                                   |
-| `--vendor`     | Compile the extension for different vendors (chrome, firefox, opera)  Default: chrome                                                                 |
-| `--sourcemaps` | Force the creation of sourcemaps. Default: !production                                                                                                |
 
+### 应用端
 
-### pack
-
-Zips your `dist` directory and saves it in the `packages` directory.
-
-    $ gulp pack --vendor=firefox
-
-### Version
-
-Increments version number of `manifest.json` and `package.json`,
-commits the change to git and adds a git tag.
-
-
-    $ gulp patch      // => 0.0.X
-
-or
-
-    $ gulp feature    // => 0.X.0
-
-or
-
-    $ gulp release    // => X.0.0
-
-
-## Globals
-
-The build tool also defines a variable named `ENV` in your scripts. It will be set to `development` unless you use the `--production` option.
-
-
-**Example:** `./app/background.js`
-
-	if(ENV === 'development'){
-		console.log('We are in development mode!');
-	}
+由于gulp和webpack搭配不便,且应用端需要更复杂的webpack打包策略,现将应用端代码独立出来单独用webpack管理,支持TypeScript,class风格的vue组件,配置入口是src/initPageApp.ts

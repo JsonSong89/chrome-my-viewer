@@ -4,7 +4,6 @@
       <div class="column">
         <p class="notification ">功能面板</p>
         <button @click="test1">进入浏览模式(background)</button>
-        <button @click="test3">进入浏览模式(dom)</button>
         <button @click="test2">注入常用库</button>
       </div>
     </div>
@@ -34,7 +33,7 @@
             {name: "injectFile"}//通道名称
           );
           port.onMessage.addListener(function (msg) {//这里同时利用通道建立监听消息，可以监听对方返回的消息
-            if (msg.filePath ) {//如果对方(popup.js)返回的消息是{jia: "yuuuuu"}则将扩展里面的input框的值设置为"yuuuuuuu"
+            if (msg.filePath) {//如果对方(popup.js)返回的消息是{jia: "yuuuuu"}则将扩展里面的input框的值设置为"yuuuuuuu"
 
             }
           });
