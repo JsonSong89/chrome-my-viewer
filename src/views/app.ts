@@ -3,7 +3,7 @@ import {KnownUrlStrategyFactory, KnownUrlStrategy} from '../strategies/KnownUrlS
 import {NextStrategyFactory, NextStrategy} from '../strategies/NextStrategy';
 
 @Component
-export default class KnowUrlVC extends Vue {
+export default class AppVC extends Vue {
   str = "zhanweitest";
   flag = new Date();
   imgs: string[] = [];

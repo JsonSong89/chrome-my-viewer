@@ -9,6 +9,7 @@ import {Component} from 'vue-property-decorator'
 import moment from "moment";
 import axios from "axios";
 import $ from "jquery";
+import Cookies from "js-cookie";
 export {Component, Inject, Model, Prop, Watch} from 'vue-property-decorator'
 
 
@@ -24,6 +25,6 @@ export let Hooks = {
 };
 
 export {
-  Vue, moment, _, axios, $
+  Vue, moment, _, axios, $, Cookies
 }
 
