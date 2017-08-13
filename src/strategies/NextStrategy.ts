@@ -3,6 +3,7 @@
  * 可以通过构造url来进行组装页面的策略集合
  */
 import {axios, Vue, _, $} from "source/base";
+
 /**
  *  selected by get next url
  */
@@ -33,6 +34,9 @@ let strategyList = [{
   }
 }];
 
+function getRandomToken(): string {
+  return _.random(10000, 99999).toString()
+}
 
 class NextStrategyFactory {
   static getStrategy(url: string): NextStrategy | null {
@@ -46,11 +50,15 @@ class NextStrategyFactory {
   }
 
   static doGetImgs(imgs: string[], $$: JQuery, strategy: NextStrategy | null) {
-    if (strategy == null) return;
-    let next = strategy.getNextUrl($$);
-    if (next) {
-      axios.get(next).then(res => {
-        console.log("get:  " + next);
+    if (strategy == null) {
+      console.log("跳过NextStrategy策略");
+      return;
+    }
+    let nextUrl = strategy.getNextUrl($$);
+    if (nextUrl) {
+      nextUrl = nextUrl.indexOf("?") >= 0 ? `${nextUrl}&_myRandomToken=${getRandomToken()}` : `${nextUrl}?_myRandomToken=${getRandomToken()}`;
+      axios.get(nextUrl).then(res => {
+        console.log("get:  " + nextUrl);
         let _$ = $(res.data);
         imgs.push(strategy.getImgUrl(_$));
         let _next = strategy.getNextUrl(_$);
@@ -59,6 +67,8 @@ class NextStrategyFactory {
         } else {
           return
         }
+      }).catch(err => {
+        console.log(nextUrl + " error : " + err)
       })
     }
   }

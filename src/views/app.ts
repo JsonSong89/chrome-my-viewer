@@ -9,6 +9,7 @@ export default class AppVC extends Vue {
   imgs: string[] = [];
 
   test1() {
+    console.log("start AppVC")
     this.useStrategy(window.location.href)
   }
 

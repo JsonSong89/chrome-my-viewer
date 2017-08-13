@@ -5,6 +5,10 @@
       <span>x: {{mouseX}}  y:{{mouseY}}</span>
     </div>
     <div>
+      <button @click="funToPic">进入看图</button>
+    </div>
+
+    <div>
       <button @click="fillHistory">填充数据</button>
     </div>
     <div>

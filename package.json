@@ -5,9 +5,9 @@
   "description": "chrome extesion with vue",
   "scripts": {
     "dev:chrome": "gulp --watch --vendor=chrome",
-    "dev:scripts": "gulp scripts",
+    "dev:chrome_script_only": "gulp scripts",
     "build:chrome": "gulp --production --vendor=chrome && gulp pack --vendor=chrome",
-    "dev:app": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
+    "dev:app_src": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
     "build:dev": "cross-env NODE_ENV=development webpack --progress --hide-modules",
     "build:pro": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },

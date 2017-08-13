@@ -1,6 +1,6 @@
 <template>
   <div>
-    <side-nav></side-nav>
+    <side-nav @pic="test1"></side-nav>
     <div>
       <span>{{flag}}</span>
       <button @click="test1">进入看图</button>
